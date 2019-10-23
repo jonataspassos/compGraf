@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>.::Formas Primárias::.</title>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="drawPixel.js"></script>
+    <script src="algoritmosRetas.js"></script>
+    <script src="algoritmosCircunferencias.js"></script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-5">
+            <h2>Formas Primárias</h2>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Reta
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="option3" autocomplete="off"> Circulo
+                </label>
+            </div>
+            <div id="rect-config" style="margin:10px;">
+                <h4>Desenhar Reta</h4>
+                <form style="margin:20px">
+                    <h6>Selecione o Algoritmo</h6>
+                    <div style="margin:10px;">
+                    <div class="radio">
+                        <label><input id="dda-select" type="radio" name="optradio" checked>Algoritmo DDA</label>
+                    </div>
+                    <div class="radio">
+                        <label><input id="bresehan-select" type="radio" name="optradio">Algoritmo AKJASLKJ</label>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-group col-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Inicio</span>
+                            </div>
+                            <input id="reta-i-x" type="number" aria-label="coordenada X" placeholder="X"class="form-control">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text">:</span>
+                            </div>
+                            <input id="reta-i-y" type="number" aria-label="coordenada Y" placeholder="Y" class="form-control">
+                        </div>
+                        <div class="input-group col-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Fim</span>
+                            </div>
+                            <input id="reta-f-x" type="number" aria-label="coordenada X" placeholder="X" class="form-control">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text">:</span>
+                            </div>
+                            <input id="reta-f-y" type="number" aria-label="coordenada Y" placeholder="Y" class="form-control">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" style="margin:20px" onclick="desenharReta();">Desenhar</button>
+                </form>
+            </div>
+            <div id="circle-config">
+                    <h4>Desenhar Círculo</h4>
+                    <form>
+                        <div class="radio">
+                            <label><input id="quadrante-select" type="radio" name="optradio" checked>Algoritmo Quadrante</label>
+                        </div>
+                        <div class="radio">
+                            <label><input id="octante-select" type="radio" name="optradio">Algoritmo Octante</label>
+                        </div>
+                        <div class="row">
+                            <div class="input-group col-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Centro</span>
+                                </div>
+                                <input id="circle-x" type="number" placeholder="X" aria-label="coordenada X" class="form-control">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">:</span>
+                                </div>
+                                <input id="circle-y" type="number" placeholder="Y" aria-label="coordenada Y" class="form-control">
+                            </div>
+                            <div class="input-group col-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Raio</span>
+                                </div>
+                                <input id="circle-r" type="number" aria-label="Raio" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary" style="margin:20px" onclick="desenharCircunferencia();">Desenhar</button>
+                    </form>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div id="container"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small blue pt-4">
+
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-6 mt-md-0 mt-3">
+
+                    <!-- Content -->
+                    <h5 class="text-uppercase">Footer Content</h5>
+                    <p>Here you can use rows and columns to organize your footer content.</p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+
+
+            </div>
+            <!-- Grid row -->
+        </div>
+        <!-- Footer Links -->
+
+        <!-- Copyright --
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+        </div>
+        !-- Copyright -->
+
+    </footer>
+
+
+
+    <script>
+        configScreen("#container", 1, 700, 525);
+
+        function desenharReta(){
+            clear_window();
+            var ix = parseInt(document.querySelector("#reta-i-x").value),
+                iy = parseInt(document.querySelector("#reta-i-y").value),
+                fx = parseInt(document.querySelector("#reta-f-x").value),
+                fy = parseInt(document.querySelector("#reta-f-y").value);
+            
+            if(document.querySelector("#dda-select").checked){
+                console.log("dda "+ix+":"+iy+" "+fx+":"+fy+"");
+                Algoritmo_DDA(ix,iy,fx,fy);
+            }else if(document.querySelector("#bresehan-select").checked){
+                console.log("bresehan "+ix+":"+iy+" "+fx+":"+fy+"");
+                Algoritmo_Bresenham(ix,iy,fx,fy);
+            }
+        }
+
+        function desenharCircunferencia(){
+            clear_window();
+            var x = parseInt(document.querySelector("#circle-x").value),
+                y = parseInt(document.querySelector("#circle-y").value),
+                r = parseInt(document.querySelector("#circle-r").value);
+            
+            if(document.querySelector("#quadrante-select").checked){
+                console.log("quadrante "+x+":"+y+" "+r+"");
+                Algoritmo_PontoMedio(x,y,r);
+            }else if(document.querySelector("#octante-select").checked){
+                console.log("octante "+x+":"+y+" "+r+"");
+                Algoritmo_Octante(x,y,r);
+            }
+        }
+    </script>
+</body>
+
+</html>

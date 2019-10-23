@@ -72,8 +72,8 @@ var configScreen, draw_pixel, clear_window,drawSampleRect;
 			list_of_pixels = list_of_pixels.concat(obj.c);
 
 			g.selectAll(".pixel").data(list_of_pixels)
-				
 				.attr("fill",color_pixel);
+				
 			g.selectAll(".pixel").data(list_of_pixels)
 				.enter().append("rect").attr("class","pixel")
 					

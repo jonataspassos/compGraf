@@ -1,66 +1,36 @@
-function Algoritmo_Octante(xc, yc, r) {
-    const A = Math.PI / 4
-    const dAng = 0.05 * A
-    let x = r
-    let y = 0
-    let i = 0
-    let ang = 0
-    let xvar = xc + x
-    let yvar = yc + y
-    let coordenadas = { t: i, c: [] }
+function octPixels(xc,yc,x,y){
+    var ret = [];
+    ret.push({ x: xc +x , y: yc+y });
+    ret.push({ x: xc +y , y: yc+x });
+    ret.push({ x: xc +y , y: yc-x });
+    ret.push({ x: xc -x , y: yc+y });
+    ret.push({ x: xc -x , y: yc-y });
+    ret.push({ x: xc -y , y: yc-x });
+    ret.push({ x: xc -y , y: yc+x });
+    ret.push({ x: xc +x , y: yc-y });
 
-    while (A >= ang) {
-        coordenadas.c.push({ x: x, y: y });
-        coordenadas.c.push({ x: y, y: x });
-        coordenadas.c.push({ x: x, y: -y });
-        coordenadas.c.push({ x: x, y: -y });
-        coordenadas.c.push({ x: x, y: -y });
-        coordenadas.c.push({ x: x, y: -y });
-        coordenadas.c.push({ x: x, y: -y });
-        coordenadas.c.push({ x: x, y: -y });
-        while (i < 8) {
-            ++i
-            switch (i) {
-                case 1:
-                    xvar = x
-                    yvar = y
-                    break;
-                case 2:
-                    xvar = y
-                    yvar = x
-                    break;
-                case 3:
-                    yvar = yvar * (-1)
-                    break;
-                case 4:
-                    xvar = x * (-1)
-                    yvar = y
-                    break;
-                case 5:
-                    yvar = yvar * (-1)
-                    break;
-                case 6:
-                    xvar = y * (-1)
-                    yvar = x * (-1)
-                    break;
-                case 7:
-                    yvar = yvar * (-1)
-                    break;
-                case 8:
-                    xvar = x
-                    yvar = y * (-1)
-                    break;
-            }
-            xvar += xc
-            yvar += yc
-            console.log('x = ', xvar, 'y = ', yvar)
-            coordenadas = { t: it, c: [{ x: xvar, y: yvar }] }
+    return ret;
+}
+
+function Algoritmo_CirculoSimples(xc, yc, r) {
+    if(r>1){
+        var ang = 0;
+        var div = Math.round(Math.PI*r/2);
+
+        var coordenadas = { t: 0, c: [] };
+        //r = r*Math.sqrt(2)/2;
+        var x = r;
+        var y = 0;
+        var step = Math.PI/(2*div);
+        for(var i = 0; i<div;i++){
+            coordenadas.c = octPixels(xc,yc,Math.round(x),Math.round(y));
+            coordenadas.t = i;
             draw_pixel(coordenadas);
+            x = r*Math.cos(step*i);
+            y = r*Math.sin(step*i);
         }
-        ang += dAng
-        i = 0
-        x = r * Math.cos(ang)
-        y = r * Math.sin(ang)
+    }else{
+        draw_pixel({ t: 0, c: [{x:xc,y:yc}] });
     }
 }
 

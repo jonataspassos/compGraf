@@ -85,11 +85,11 @@
                     <h6>Selecione o Algoritmo</h6>
                     <div style="margin:10px;">
                         <div class="radio">
-                            <label><input id="quadrante-select" type="radio" name="optradio" checked>Algoritmo
-                                Quadrante</label>
+                            <label><input id="simple-select" type="radio" name="optradio" checked>Algoritmo
+                                Círculo Simples</label>
                         </div>
                         <div class="radio">
-                            <label><input id="octante-select" type="radio" name="optradio">Algoritmo Octante</label>
+                            <label><input id="median-point-select" type="radio" name="optradio">Algoritmo Ponto Médio</label>
                         </div>
                     </div>
                     <div class="row">
@@ -186,12 +186,12 @@
                 y = parseInt(document.querySelector("#circle-y").value),
                 r = parseInt(document.querySelector("#circle-r").value);
 
-            if (document.querySelector("#quadrante-select").checked) {
-                console.log("quadrante " + x + ":" + y + " " + r + "");
+            if (document.querySelector("#simple-select").checked) {
+                console.log("simple " + x + ":" + y + " " + r + "");
+                Algoritmo_CirculoSimples(x, y, r);
+            } else if (document.querySelector("#median-point-select").checked) {
+                console.log("median-point " + x + ":" + y + " " + r + "");
                 Algoritmo_PontoMedio(x, y, r);
-            } else if (document.querySelector("#octante-select").checked) {
-                console.log("octante " + x + ":" + y + " " + r + "");
-                Algoritmo_Octante(x, y, r);
             }
         }
 
@@ -245,6 +245,7 @@
                     }
                     i++;
                 }, 1000);
+                clearInterval(pauseReta);
        //     })()
 
 

@@ -45,18 +45,8 @@ function Algoritmo_DDA(x1, y1, x2, y2) {
 }
 
 function Algoritmo_Bresenham(x1, y1, x2, y2) {
+    
     var troca = false;
-    if(x1 == x2){
-        var temp = x1;
-        x1 = y1;
-        y1 = temp;
-        
-        temp = x2;
-        x2 = y2;
-        y2 = temp;
-
-        troca = true;
-    }
 
     if(x1>x2){
         var temp = x1;
@@ -72,7 +62,7 @@ function Algoritmo_Bresenham(x1, y1, x2, y2) {
     var dy = y2 - y1
     let p = 2 * dy - dx
     let x = x1, y = 0, it = 0
-    let coordenadas = { t: it, c: [{ x: troca?y1+y:x1+x, y: troca?x:y }] }
+    let coordenadas = { t: it, c: [{ x: troca?y:x, y: troca?x:y }] }
     draw_pixel(coordenadas);
     while (x < x2) {
         it += 1
@@ -85,7 +75,7 @@ function Algoritmo_Bresenham(x1, y1, x2, y2) {
         }
         //console.log('x = ', x, 'y = ', y)
         x += 1
-        coordenadas = { t: it, c: [{ x: troca?y1+y:x1+x, y: troca?x:y }] }
+        coordenadas = { t: it, c: [{ x: troca?y:x, y: troca?x:y }] }
         draw_pixel(coordenadas);
     }
 

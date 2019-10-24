@@ -89,7 +89,8 @@
                                 Círculo Simples</label>
                         </div>
                         <div class="radio">
-                            <label><input id="median-point-select" type="radio" name="optradio">Algoritmo Ponto Médio</label>
+                            <label><input id="median-point-select" type="radio" name="optradio">Algoritmo Ponto
+                                Médio</label>
                         </div>
                     </div>
                     <div class="row">
@@ -207,46 +208,67 @@
             }
 
         });
-            //(function () {
-                var retasExemplo = [
-                    [1, 1, 10, 10],//
-                    [3, 1, 7, 10],
-                    [5, 1, 5, 10],
-                    [7, 1, 3, 10],
-                    [10, 1, 1, 10],
-                    [10, 3, 1, 7],
-                    [10, 5, 1, 5],//
-                    [10, 7, 1, 3],//
-                    [10, 10, 1, 1],//
-                    [7, 10, 3, 1],
-                    [5, 10, 5, 1],
-                    [3, 10, 7, 1],
-                    [1, 10, 10, 1],
-                    [1, 7, 10, 3],
-                    [1, 5, 10, 5],//
-                    [1, 3, 10, 7],//
-                    //[1, 1, 10, 10],
-                ];
-                var i=0;
-                var pauseReta = window.setInterval(() => {
-                    i = i%retasExemplo.length;
-                    clear_window();
-                    var ix = retasExemplo[i][0],
-                        iy = retasExemplo[i][1],
-                        fx = retasExemplo[i][2],
-                        fy = retasExemplo[i][3];
+        //(function () {
+        var retasExemplo = [
+            [1, 1, 10, 10],//
+            [3, 1, 7, 10],
+            [5, 1, 5, 10],
+            [7, 1, 3, 10],
+            [10, 1, 1, 10],
+            [10, 3, 1, 7],
+            [10, 5, 1, 5],//
+            [10, 7, 1, 3],//
+            [10, 10, 1, 1],//
+            [7, 10, 3, 1],
+            [5, 10, 5, 1],
+            [3, 10, 7, 1],
+            [1, 10, 10, 1],
+            [1, 7, 10, 3],
+            [1, 5, 10, 5],//
+            [1, 3, 10, 7],//
+            //[1, 1, 10, 10],
+        ];
 
-                    if (document.querySelector("#dda-select").checked) {
-                        console.log("dda " + ix + ":" + iy + " " + fx + ":" + fy + "");
-                        Algoritmo_DDA(ix, iy, fx, fy);
-                    } else if (document.querySelector("#bresehan-select").checked) {
-                        console.log("bresehan " + ix + ":" + iy + " " + fx + ":" + fy + "");
-                        Algoritmo_Bresenham(ix, iy, fx, fy);
-                    }
-                    i++;
-                }, 1000);
-                clearInterval(pauseReta);
-       //     })()
+        var i = 0;
+        var pauseReta = window.setInterval(() => {
+            i = i % retasExemplo.length;
+            clear_window();
+            var ix = retasExemplo[i][0],
+                iy = retasExemplo[i][1],
+                fx = retasExemplo[i][2],
+                fy = retasExemplo[i][3];
+
+            if (document.querySelector("#dda-select").checked) {
+                console.log("dda " + ix + ":" + iy + " " + fx + ":" + fy + "");
+                Algoritmo_DDA(ix, iy, fx, fy);
+            } else if (document.querySelector("#bresehan-select").checked) {
+                console.log("bresehan " + ix + ":" + iy + " " + fx + ":" + fy + "");
+                Algoritmo_Bresenham(ix, iy, fx, fy);
+            }
+            i++;
+        }, 1000);
+        clearInterval(pauseReta);
+        //     })()
+        var j = 0;
+        var pauseCircle = window.setInterval(() => {
+            j = j % 30;
+
+            clear_window();
+
+            if (document.querySelector("#simple-select").checked) {
+                console.log("simple " + 30 + ":" + 30 + " " + j + "");
+                Algoritmo_CirculoSimples(30, 30, j);
+            } else if (document.querySelector("#median-point-select").checked) {
+                console.log("median-point " + 30 + ":" + 30 + " " + j + "");
+                Algoritmo_PontoMedio(30, 30, j);
+            }
+
+            j++;
+        }, 1000);
+        //clearInterval(pauseCircle);
+
+
+
 
 
     </script>

@@ -76,7 +76,6 @@ var configScreen, draw_pixel, clear_window,drawSampleRect;
 				
 			g.selectAll(".pixel").data(list_of_pixels)
 				.enter().append("rect").attr("class","pixel")
-					
 					.attr("x",function(d){return x(d.x);})
 					.attr("y",function(d){return x(d.y);})
 					.attr("width",x.bandwidth())

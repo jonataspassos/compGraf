@@ -1,3 +1,10 @@
+/**
+ * Trabalho feito por:
+ *      Elayne Rute Lemos
+ *      Ezequias Antunes
+ *      Jonatas Passos 
+ */
+
 function Algoritmo_DDA(x1, y1, x2, y2) {
     var troca = false;
     if (x1 == x2) {

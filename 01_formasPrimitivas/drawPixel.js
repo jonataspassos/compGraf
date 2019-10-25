@@ -1,4 +1,11 @@
-var configScreen, draw_pixel, clear_window,drawSampleRect;
+/**
+ * Trabalho feito por:
+ *      Elayne Rute Lemos
+ *      Ezequias Antunes
+ *      Jonatas Passos 
+ */
+
+var configScreen, draw_pixel, clear_window, drawSampleRect;
 (function () {
 
 	function _bandwidth() {
@@ -17,7 +24,7 @@ var configScreen, draw_pixel, clear_window,drawSampleRect;
 		if (!obj.c || !(obj.c instanceof Array)) {
 			return false;
 		}
-		
+
 		if (obj.c.length > 0) {
 			for (var i = 0; i < obj.c.length; i++) {
 				if (!obj.c[i] || (typeof obj.c[i]) != "object") {
@@ -33,7 +40,7 @@ var configScreen, draw_pixel, clear_window,drawSampleRect;
 		return true;
 	}
 
-	var x = d3.scaleLinear(), 
+	var x = d3.scaleLinear(),
 		y = d3.scaleLinear();
 
 	var g;
@@ -44,10 +51,10 @@ var configScreen, draw_pixel, clear_window,drawSampleRect;
 	var time_between = 500;
 	var width = 800,
 		height = 600,
-		n_pixel_w = width/10,
-		n_pixel_h = height/10;
+		n_pixel_w = width / 10,
+		n_pixel_h = height / 10;
 
-		
+
 	x.bandwidth = _bandwidth;
 	y.bandwidth = _bandwidth;
 
@@ -61,10 +68,10 @@ var configScreen, draw_pixel, clear_window,drawSampleRect;
 		g = d3.select(container).append("svg")
 			.attr("width", width)
 			.attr("height", height);
-		x.range([0,width]).domain([0,n_pixel_w]);
-		y.range([0,height]).domain([0,n_pixel_h]);
-		g.append("rect").attr("class","borda").attr("width",width).attr("height",height)
-			.attr("fill","none").attr("stroke","#000").attr("stroke-width",2);
+		x.range([0, width]).domain([0, n_pixel_w]);
+		y.range([0, height]).domain([0, n_pixel_h]);
+		g.append("rect").attr("class", "borda").attr("width", width).attr("height", height)
+			.attr("fill", "none").attr("stroke", "#000").attr("stroke-width", 2);
 	}
 
 	draw_pixel = function (obj) {
@@ -72,34 +79,35 @@ var configScreen, draw_pixel, clear_window,drawSampleRect;
 			list_of_pixels = list_of_pixels.concat(obj.c);
 
 			g.selectAll(".pixel").data(list_of_pixels)
-				.attr("fill",color_pixel);
-				
+				.attr("fill", color_pixel);
+
 			g.selectAll(".pixel").data(list_of_pixels)
-				.enter().append("rect").attr("class","pixel")
-					.attr("x",function(d){return x(d.x);})
-					.attr("y",function(d){return x(d.y);})
-					.attr("width",x.bandwidth())
-					.attr("height",y.bandwidth())
-					.attr("fill",color_new_pixel);
+				.enter().append("rect").attr("class", "pixel")
+				.attr("x", function (d) { return x(d.x); })
+				.attr("y", function (d) { return x(d.y); })
+				.attr("width", x.bandwidth())
+				.attr("height", y.bandwidth())
+				.attr("fill", color_new_pixel);
 		}
 	}
-	clear_window = function(){
+	clear_window = function () {
 		g.selectAll(".pixel").remove();
 		list_of_pixels = [];
 	}
 
-	drawSampleRect = function(){
+	drawSampleRect = function () {
 		var i = 0;
-        var interval = setInterval(function () {
-            draw_pixel(
-                {t: i, c: [
-                    { x: i, y: i }
-                ]
-            });
-            i++;
-            if (i == 60)
-                clearInterval(interval);
-        }, 1000);
+		var interval = setInterval(function () {
+			draw_pixel(
+				{
+					t: i, c: [
+						{ x: i, y: i }
+					]
+				});
+			i++;
+			if (i == 60)
+				clearInterval(interval);
+		}, 1000);
 	}
 
 })();

@@ -1,3 +1,10 @@
+/**
+ * Trabalho feito por:
+ *      Elayne Rute Lemos
+ *      Ezequias Antunes
+ *      Jonatas Passos 
+ */
+
 function octPixels(xc, yc, x, y) {
     var ret = [];
     ret.push({ x: xc + x, y: yc + y });
@@ -37,7 +44,7 @@ function Algoritmo_PontoMedio(xc, yc, r) {
     var x = 0, y = r;
     var p = 1 - r;
     var i = 0;
-    var coord = { t: i, c:[] };
+    var coord = { t: i, c: [] };
 
     coord.c = octPixels(xc, yc, x, y);
     draw_pixel(coord);
